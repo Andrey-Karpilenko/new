@@ -1,0 +1,116 @@
+/* Style the tab */
+.tab {
+  overflow: hidden;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  padding: 0px 20px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  border-top: none;
+}
+
+
+dialog {
+  max-width: 400px;
+  overflow-y: auto;
+  border: 1pt solid black;
+  border-radius: 10px;
+  box-shadow: -10px 10px 20px black;
+}
+
+dialog::backdrop {
+  background: black;
+  opacity:0.5;
+}
+
+#description-dialog {
+  max-height: 85vh;
+}
+
+img{
+  background-color: white;
+  width: 100px;
+  height: 100px;
+  float: right;
+}
+
+fieldset {
+  text-align: left;
+  border: 1px solid #000;
+
+  border-radius: 0.5em;
+}
+
+
+input[type="checkbox"] {
+  appearance: none;
+  position: relative;
+  width: 1em;
+  height: 1em;
+  border: 1px solid gray;
+  vertical-align: -2px;
+  color: green;
+  outline: none;
+}
+  
+input[type="checkbox"]::before {
+  content: "✔";
+  position: absolute;
+  font-size: 1.2em;
+  right: -1px;
+  top: -0.3em;
+  visibility: hidden;
+}
+  
+input[type="checkbox"]:checked::before {
+  visibility: visible;
+}
+  
+input[type="checkbox"]:disabled {
+  border-color: black;
+  background: #ddd;
+  color: gray;
+}
+
+.expendable {
+  display: none;
+}
+
+#show:checked ~.expendable, #computer:checked ~.expendable{
+  display:inline;
+}
+
+.out{
+  display: flex;
+  justify-content: space-evenly;
+  /* border: 1px solid red; */
+  margin: 0;
+  padding: 0;
+}
+.in{
+  display: inline;
+  min-width: 120px;
+  /* border: 1px solid blue; */
+}

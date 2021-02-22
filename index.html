@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>Squares</title>
+	<link rel="shortcut icon" href="./img/squares.png" type="image/x-icon">
+	<link rel="stylesheet" href="./css/squares.css ">
+	<link rel="stylesheet" href="./css/settings-form.css">
+</head>
+
+<body>
+	<main>
+		<h1 id="header">SQUARES GAME</h1>
+		<dialog id="description-dialog">
+			<h4>DO NOT</h4>
+			<h4><button id="play">START PLAYING</button></h4>
+			<h4>UNTIL YOU HAVE READ<br>THE GAME DESCRIPTION:</h4>
+			<p>Squares is an old geometric game played by <b>two players</b> taking turns. To win, you must score as many
+				points as possible.</p>
+			<p>Points are awarded for the <b>built squares</b>. You put dots of your color at the nodes of a square
+				lattice. If four (4) dots of <span class="blue">your color</span> form a square, you get points for it.</p>
+			<p>The larger the square area, the more points!</p>
+			<img src="img/squares.png" alt="Squares">
+			<p>The picture shows the playing field after both players have made 7 moves.</p>
+			<p>The <span class="red">Red's</span> have a small red square with area 1 and a large red square with area 10,
+				while the <span class="blue">Blue's</span> have a small square with area 2 and a larger square with area 4.
+			</p>
+			<p>Now the score is 11: 6 in favor of the <span class="red">Red's</span>, but almost half of the game is still
+				ahead...</p>
+			<p>Squares can intersect, since you can put your point on any <span class="grey"><b>free (grey color)
+						node</b></span> of the lattice, for example, to the side or inside the square of the enemy.</p>
+			<p>You can make your moves not in order to build a square, but in order to prevent your enemy from building his
+				own.</p>
+			<p>You can prepare a system from your points so that in the next move you will build several squares at once
+				and earn a lot of points. And the enemy will not be able to recognize your cunning plan, since by the end of
+				the game the field is covered with many lines and points that only a good player can figure out.</p>
+			<p><span class="blue">Blue's</span> always makes the <span class="blue"><b>first move</b></span>, so choose
+				your color in different games in turn.</p>
+
+			<p>To restart a game, click the New Game <b>↻</b> button. The size of the field (and some other parameters) can
+				be selected in the Settings <b>⚙</b>.</p>
+			<p>Click <b><span class="grey">START PLAYING</span></b> button on the top to start playing.</p>
+		</dialog>
+	</main>
+
+	<div class="game">
+		<div class="panel top">
+			<button id="new-game" class="round-button" title="New Game">↻</button>
+			<div id="blue-name" class="blue"></div>
+			<div class="total">
+				<b><span id="blue-total" style="color: blue;">0</span>:<span id="red-total"
+						style="color: red;">0</span></b><br>
+				<span id="current-player"></span>
+			</div>
+			<div id="red-name" class="red"></div>
+			<button id="open-settings" class="round-button" title="Settings">⚙</button>
+		</div>
+		<div>
+			<canvas id="permanent-canvas"></canvas>
+			<canvas id="temporary-canvas"></canvas>
+			<div id="my-field">
+			</div>
+		</div>
+		<div class="panel bottom">
+			<div id="blue-results">Your moves:</div>
+			<div id="red-results">Your moves:</div>
+		</div>
+	</div>
+	<dialog id='settings-dialog'>
+		<form id="settings" name="settings" method="dialog">
+			<h1>Settings</h1>
+			<div>
+				<input type="checkbox" id="no-description" name="no-description" value="false">
+				<label for="no-description">Don't show game description again</label>
+			</div>
+
+			<div class="tab">
+				<button class="tablinks" onclick="openTab(event, 'field')" id="defaultOpen">Field size</button>
+				<button class="tablinks" onclick="openTab(event, 'comp')">Computer</button>
+				<button class="tablinks" onclick="openTab(event, 'view')">View</button>
+			</div>
+			<!-- Tab content -->
+			<div id="field" class="tabcontent">
+				<fieldset for="size">
+					<span>Select playfield:<br></span>
+					<div class="out">
+						<div class="in">
+							<input type="radio" id="4" name="size" value="4" checked>
+							<label for="4">4 x 4 points<br></label>
+
+							<input type="radio" id="5" name="size" value="5">
+							<label for="5">5 x 5 points<br></label>
+
+							<input type="radio" id="6" name="size" value="6">
+							<label for="6">6 x 6 points<br></label>
+
+							<input type="radio" id="7" name="size" value="7">
+							<label for="7">7 x 7 points<br></label>
+						</div>
+						<div class="in">
+							<input type="radio" id="romb" name="size" value="romb" checked>
+							<label for="romb">Romb<br></label>
+
+							<input type="radio" id="cross" name="size" value="cross" checked>
+							<label for="cross">Greek cross<br></label>
+
+							<input type="radio" id="x-cross" name="size" value="x-cross" checked>
+							<label for="x-cross">X-cross<br></label>
+
+							<input type="radio" id="random" name="size" value="random" checked>
+							<label for="random">Random<br></label>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<div id="comp" class="tabcontent">
+				<fieldset for="computer">
+					<input type="checkbox" id="computer" name="computer" value="true">
+					<label for="computer">The computer will play<br></label>
+
+					<input class="expendable" type="radio" id="blue" name="color" value="blue">
+					<label for="blue" class="expendable">for Blue's<br></label>
+
+					<input class="expendable" type="radio" id="red" name="color" value="red" checked>
+					<label for="red" class="expendable">for Red's<br></label>
+
+					<span class="expendable">Select computer's level:</span><br>
+					<input class="expendable" type="radio" id="beginner" name="level" value="beginner" checked>
+					<label for="beginner" class="expendable">Beginner<br></label>
+
+					<input class="expendable" type="radio" id="skillful" name="level" value="skillful">
+					<label for="skillful" class="expendable">Skillful<br></label>
+
+					<input class="expendable" type="radio" id="advanced" name="level" value="advanced" disabled>
+					<label for="advanced" class="expendable">Advanced</label>
+				</fieldset>
+			</div>
+
+			<div id="view" class="tabcontent">
+				<fieldset for="squares">
+					<input type="checkbox" id="show" name="show" value="true">
+					<label for="show">When hovering over a point,<br>show all squares that can be drawn<br></label>
+
+					<input class="expendable" type="radio" id="one" name="moves" value="1" checked>
+					<label for="one" class="expendable">in one move <br></label>
+
+					<input class="expendable" type="radio" id="two" name="moves" value="2">
+					<label for="two" class="expendable">in two or less moves <br></label>
+
+					<input class="expendable" type="radio" id="three" name="moves" value="3">
+					<label for="three" class="expendable">in three or less moves <br></label>
+
+					<input class="expendable" type="radio" id="four" name="moves" value="4">
+					<label for="four" class="expendable">in four or less moves <br></label>
+				</fieldset>
+			</div>
+
+			<h4><br><button type="button" form="settings" id="set-settings">Confirm</button>
+				<button id="cancel-settings">Cancel</button>
+			</h4>
+		</form>
+	</dialog>
+	<script src="./js/settings.js"></script>
+	<script src="./js/square.js"></script>
+	<script src="./js/squares.js"></script>
+</body>
+
+</html>

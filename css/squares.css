@@ -1,0 +1,208 @@
+body {
+	display: block;
+	background-color: white;
+	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+	justify-content: space-around;
+	align-content: space-around;
+	margin: 0;
+}
+.waiting {
+	cursor: wait !important;
+}
+
+h1,
+h4,
+h4 > button {
+	text-align: center;
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	color: grey;
+}
+
+p {
+	text-indent: 1em;
+}
+
+div {
+	display: flex;
+	justify-content: space-between;
+	padding-top: 5px;
+	/* border: 1px solid rgb(0, 255, 0); */
+	border-radius: 10px;
+}
+.game {
+	flex-direction: column;
+	align-items: center;
+}
+
+button {
+	border: 1px solid grey;
+	border-radius: 10px;
+	transition: 0.3s;
+}
+button:hover {
+	background-color: lightgrey;
+}
+
+.round-button {
+	display: flex;
+	cursor: pointer;
+	overflow: hidden;
+	border: none;
+	width: 48px;
+	height: 48px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	letter-spacing: 0;
+	line-height: 0px;
+	color: gray;
+	background-color: transparent;
+	font-size: xxx-large;
+	animation: slow-rotate 10s linear infinite;
+}
+@keyframes slow-rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+button:hover,
+button:active,
+button:focus {
+	outline: none;
+}
+
+/* оформление панелей */
+.panel {
+	display: inline-flex;
+	position: relative;
+	overflow: hidden;
+	max-width: 700px;
+	margin: 0;
+	padding: 0px;
+	background-color: white;
+	border-radius: 10px;
+	overflow: hidden;
+}
+.top {
+	max-height: 48px;
+}
+.bottom {
+	min-width: 400px;
+	padding-top: 5px;
+}
+.bottom > div {
+	border: 1pt solid;
+}
+
+[id*="results"] {
+	font-size: small;
+	min-width: 180px;
+	height: 100px;
+	padding: 5px 5px;
+	overflow-y: auto;
+}
+
+[id*="name"] {
+	width: 100px;
+}
+
+div[id*="blue"] {
+	color: blue;
+	border-color: blue;
+}
+div[id*="red"] {
+	color: red;
+	border-color: red;
+}
+
+[class*="blue"] {
+	color: blue;
+}
+[class*="red"] {
+	color: red;
+}
+[class*="grey"] {
+	color: grey;
+}
+
+.total {
+	display: inline;
+	font-size: large;
+	min-width: 120px;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+
+#my-field {
+	z-index: 1;
+	position: relative;
+	display: block;
+	border: 1px solid grey;
+	width: 400px;
+	height: 400px;
+	min-width: 400px;
+	padding: 0px;
+	margin: 0px 0px;
+}
+
+canvas {
+	z-index: -1;
+	position: absolute;
+}
+
+the-point {
+	position: absolute;
+	width: 12px;
+	height: 12px;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	outline: none;
+	background-color: lightgray;
+
+	text-align: center;
+	text-decoration: none;
+	/* transition: all 0.2s ease-out; */
+}
+#current-player {
+	animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.pulse {
+	animation: pulse 0.3s infinite ease-out alternate;
+}
+@keyframes pulse {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(2);
+	}
+}
+.updown {
+	animation: updown 1.5s;
+}
+@keyframes updown {
+	from {
+		transform: scale(3);
+	}
+	to {
+		transform: scale(1);
+	}
+}
